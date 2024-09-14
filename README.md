@@ -1,7 +1,7 @@
 # Test Project - Zippia Frontend Developer
 
 Made by [Thiago Silva Lopes](https://github.com/thiagoow) on September 2024. <br />
-Using TypeScript with Nuxt.js, styling Nuxt UI & Tailwind CSS.
+Using TypeScript with Nuxt.js, and styling with Nuxt UI & Tailwind CSS.
 
 ## Demo: https://zippia-test.vercel.app
 
