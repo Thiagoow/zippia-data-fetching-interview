@@ -28,8 +28,9 @@ export const userRepository = (fetch: $Fetch<any, NitroFetchRequest>): UserRepos
       users.value = usersResponse
     } catch (error: any) {
       toast.add({
-        title: 'Erro',
-        description: error.response._data.errors[0].message || error.message,
+        title: 'Error',
+        description:
+          error.response._data.errors[0].message || error.message || 'Something went wrong',
         color: 'red'
       })
     }
