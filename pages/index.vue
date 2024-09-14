@@ -2,9 +2,6 @@
 useHead({ title: 'Zippia - Test Project' })
 import { userRepository } from '~/repository/user'
 
-const colorMode = useColorMode()
-const isDark = computed(() => colorMode.preference === 'dark')
-
 const { $api } = useNuxtApp()
 const { pending, getUsers, deleteUsers, users, currentPage, perPage } = userRepository($api)
 
@@ -55,54 +52,7 @@ const rows = computed(() => {
 
 <template>
   <UContainer class="flex flex-col gap-y-5 py-14">
-    <DashboardToolbar>
-      <template #left>
-        <UButton
-          variant="soft"
-          icon="i-heroicons-globe-alt-20-solid"
-          label="Fetch Users"
-          :loading="pending"
-          @click="getUsers"
-        />
-
-        <UButton
-          color="red"
-          variant="soft"
-          icon="i-heroicons-trash-20-solid"
-          class="w-max"
-          label="Delete Users"
-          @click="deleteUsers"
-        />
-      </template>
-
-      <template #right>
-        <UInput
-          v-model="query"
-          icon="i-heroicons-magnifying-glass-20-solid"
-          placeholder="Filter users by name..."
-          autocomplete="off"
-          :ui="{ icon: { trailing: { pointer: '' } } }"
-        >
-          <template #trailing>
-            <UButton
-              v-show="query !== ''"
-              color="gray"
-              variant="link"
-              icon="i-heroicons-x-mark-20-solid"
-              :padded="false"
-              @click="query = ''"
-            />
-          </template>
-        </UInput>
-
-        <UButton
-          color="gray"
-          :icon="isDark ? 'i-heroicons-sun-20-solid' : 'i-heroicons-moon-20-solid'"
-          label="Toggle Theme"
-          @click="colorMode.preference = isDark ? 'light' : 'dark'"
-        />
-      </template>
-    </DashboardToolbar>
+    <Header v-model="query" :pending="pending" :getUsers="getUsers" :deleteUsers="deleteUsers" />
 
     <UTable
       :rows="rows"
@@ -136,14 +86,14 @@ const rows = computed(() => {
       <USelect
         v-model="perPage"
         :options="[
-          { value: 5, label: '5 rows per page' },
-          { value: 10, label: '10 rows per page' }
+          { value: 10, label: '10 rows per page' },
+          { value: 5, label: '5 rows per page' }
         ]"
       />
 
       <UPagination
         v-model="currentPage"
-        :page-count="perPage"
+        :page-count="Number(perPage)"
         :total="users.length"
         :prev-button="{
           label: 'Prev',
