@@ -1,4 +1,7 @@
-import type { Geo } from '~/types/geo'
+export interface Geo {
+  lat: string
+  lng: string
+}
 
 export interface Address {
   street: string
