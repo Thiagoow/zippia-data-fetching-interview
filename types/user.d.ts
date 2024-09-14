@@ -11,9 +11,3 @@ export interface User {
   website: string
   company: Company
 }
-
-export interface GetUsersParams {
-  query?: {
-    name: string
-  }
-}

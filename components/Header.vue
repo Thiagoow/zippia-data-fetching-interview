@@ -52,8 +52,6 @@
 </template>
 
 <script setup lang="ts">
-import type { GetUsersParams } from '~/types/user'
-
 const colorMode = useColorMode()
 const isDark = computed(() => colorMode.preference === 'dark')
 
@@ -67,7 +65,7 @@ const props = defineProps({
     required: true
   },
   getUsers: {
-    type: Function as PropType<(arg0: GetUsersParams) => void>,
+    type: Function as PropType<() => void>,
     required: true
   },
   deleteUsers: {

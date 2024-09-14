@@ -1,5 +1,5 @@
 import type { NitroFetchRequest, $Fetch } from 'nitropack'
-import type { User, GetUsersParams } from '~/types/user'
+import type { User } from '~/types/user'
 
 export interface UserRepository {
   pending: Ref<boolean>
@@ -7,7 +7,7 @@ export interface UserRepository {
   currentPage: Ref<number>
   perPage: Ref<number>
   deleteUsers: () => void
-  getUsers: (parameters: GetUsersParams) => void
+  getUsers: () => void
 }
 
 export const userRepository = (fetch: $Fetch<any, NitroFetchRequest>): UserRepository => {
@@ -21,12 +21,10 @@ export const userRepository = (fetch: $Fetch<any, NitroFetchRequest>): UserRepos
     users.value = []
   }
 
-  async function getUsers(parameters: GetUsersParams) {
+  async function getUsers() {
     pending.value = true
     try {
-      const usersResponse: User[] = await fetch('/users', {
-        query: parameters.query
-      })
+      const usersResponse: User[] = await fetch('/users')
       users.value = usersResponse
     } catch (error: any) {
       toast.add({
