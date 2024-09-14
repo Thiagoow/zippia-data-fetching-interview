@@ -14,7 +14,8 @@ const defaultColumns = [
   },
   {
     key: 'username',
-    label: 'Username'
+    label: 'Username',
+    sortable: true
   },
   {
     key: 'email',
