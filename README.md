@@ -1,8 +1,11 @@
 # Test Project - Zippia Frontend Developer
 
-Made by [Thiago Silva Lopes](https://github.com/thiagoow) using TypeScript, Nuxt.js and Tailwind CSS on September 2024.
+Made by [Thiago Silva Lopes](https://github.com/thiagoow) on September 2024. <br />
+Using TypeScript with Nuxt.js, styling Nuxt UI & Tailwind CSS.
 
-## Setup
+## Demo: https://zippia-test.vercel.app
+
+### Setup
 
 Install the dependencies:
 
@@ -10,7 +13,7 @@ Install the dependencies:
 yarn install
 ```
 
-## Development Server
+### Development Server
 
 Start the development server on `http://localhost:3000`:
 
@@ -18,7 +21,7 @@ Start the development server on `http://localhost:3000`:
 yarn dev
 ```
 
-## Production
+### Production
 
 Build the application for production:
 
