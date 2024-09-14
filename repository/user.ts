@@ -4,6 +4,9 @@ import type { User, GetUsersParams } from '~/types/user'
 export interface UserRepository {
   pending: Ref<boolean>
   users: Ref<User[]>
+  currentPage: Ref<number>
+  perPage: Ref<number>
+  deleteUsers: () => void
   getUsers: (parameters: GetUsersParams) => void
 }
 
@@ -11,6 +14,12 @@ export const userRepository = (fetch: $Fetch<any, NitroFetchRequest>): UserRepos
   const toast = useToast()
   const pending: Ref<boolean> = ref(false)
   const users: Ref<User[]> = ref([])
+  const currentPage = ref(1)
+  const perPage = ref(10)
+
+  function deleteUsers() {
+    users.value = []
+  }
 
   async function getUsers(parameters: GetUsersParams) {
     pending.value = true
@@ -32,6 +41,9 @@ export const userRepository = (fetch: $Fetch<any, NitroFetchRequest>): UserRepos
   return {
     pending,
     users,
-    getUsers
+    currentPage,
+    perPage,
+    getUsers,
+    deleteUsers
   }
 }
