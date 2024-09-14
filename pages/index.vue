@@ -35,18 +35,15 @@ const defaultColumns = [
 ]
 
 const rows = computed(() => {
-  const lowercasedQuery = query.value.toLowerCase()
+  if (!users.value.length) return []
+  const handledQuery = query.value.trim().toLowerCase()
+
+  const filteredUsers = handledQuery
+    ? users.value.filter((user) => user.name.toLowerCase().includes(handledQuery))
+    : users.value
+
   const startIndex = (currentPage.value - 1) * perPage.value
-  const endIndex = currentPage.value * perPage.value
-
-  let filteredUsers = users.value
-  if (query.value) {
-    filteredUsers = filteredUsers.filter((user) =>
-      user.name.toLowerCase().includes(lowercasedQuery)
-    )
-  }
-
-  return filteredUsers.slice(startIndex, endIndex)
+  return filteredUsers.slice(startIndex, startIndex + perPage.value)
 })
 </script>
 
